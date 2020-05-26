@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>[2주차] 원페이지 쇼핑몰</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <style>
+          body{
+            margin: 50px 50px 50px 50px
+          }
+        </style>
+        <script>
+            $.ajax({
+                type: "GET", 
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {}, 
+                success: function(response){
+                  var usdtokrw = response[1].rate;
+                  $('#exchange_rate').append(usdtokrw);
+                }
+              })
+            
+            function msgbox() {
+                var input_name = $('#input_name').val();
+                var input_qty = $('#input_qty').val();
+                var input_addr = $('#input_addr').val();
+                var input_num = $('#input_num').val();
+                var qty_selected = $.isNumeric(input_qty);
+                if(input_name && qty_selected && input_addr && input_num){
+                    alert('주문이 완료되었습니다!');
+                }
+                else{
+                    if(input_name===''){
+                        alert('주문자 이름을 확인해주세요!');
+                    }
+                    else if(qty_selected===false){
+                        alert('수량을 확인해주세요!');
+                    }
+                    else if(input_addr===''){
+                        alert('주소를 확인해주세요!');
+                    }
+                    else if(input_num===''){
+                        alert('번호를 확인해주세요!');
+                    }
+                }    
+              
+            }
+        </script>
+    </head>
+
+    <body class="text-center">
+        <div class="shopping_page">
+        <img class="ice-americano" src="https://image.istarbucks.co.kr/upload/store/skuimg/2015/08/[110563]_20150813222100205.jpg" alt="" width="300" height="300">
+        <h1 class="h4 mt-3"> 아이스 아메리카노(Tall) <span class="badge badge-success">인기</span></h1>
+        <h5>가격 4,100원</h5>
+        <p style="color:blue" id="exchange_rate">달러-원 환율 : </p>
+        <p>국가가 허락한 마약, 회사가 종용하는 스팀팩!</p>
+        <hr />
+        <h4 class="mb-3">주문하기</h4>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="your_name">주문자 이름</span>
+            </div>
+            <input type="text" class="form-control" id="input_name" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">수량</label>
+            </div>
+            <select class="custom-select" id="input_qty">
+              <option selected>---선택---</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="your_addr">주소</span>
+            </div>
+            <input type="text" class="form-control" id="input_addr" placeholder="" aria-label="Username" aria-describedby="basic-addon3">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="your_num">전화번호</span>
+            </div>
+            <input type="text" class="form-control" id="input_num" placeholder="" aria-label="Username" aria-describedby="basic-addon4">
+          </div>
+        <div>
+          <button onclick="msgbox()" class="btn btn-lg btn-primary btn-block" type="submit">주문하기</button>
+        </div>
+        <p class="mt-3 mb-3 text-muted">*2주차 과제입니다*</p>
+      </div>
+    </body>
+</html>
